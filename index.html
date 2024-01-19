@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Обмен Валюта</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+	<table cellpadding="15" class="table table-striped table-hover">
+		<tr>
+			<td>Введите сумму:</td>
+			<td></td>
+			<td>KZT (тенге)</td>
+			<td>UDS (доллар)</td>
+			<td>EURO (евро)</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="" id="summa" onchange="check()" class="form-control" aria-describedby="addon-wrapping" placeholder="BUY"> 
+			</td>
+			<td>
+				<select id="convert" onchange="check()" class="form-select" aria-label="Default select example">
+					<option value="KZT">TENGE</option>
+					<option value="USD">DOLLAR</option>
+					<option value="EUR">EURO</option>
+				</select>
+			</td>
+			<td>
+				<input id="KZT" readonly class="form-control" aria-describedby="addon-wrapping">
+			</td>
+			<td>
+				<input id="USD" readonly class="form-control" aria-describedby="addon-wrapping">
+			</td>
+			<td>
+				<input id="EUR" readonly class="form-control" aria-describedby="addon-wrapping">
+			</td>
+		</tr>
+	</table>
+	<table cellpadding="15" class="table table-striped table-hover">
+		<tr>
+			<td>Введите сумму:</td>
+			<td></td>
+			<td>KZT (тенге)</td>
+			<td>UDS (доллар)</td>
+			<td>EURO (евро)</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="" id="summaSell" onchange="check()" class="form-control" aria-describedby="addon-wrapping" placeholder="SELL"> 
+			</td>
+			<td>
+				<select id="convertSell" onchange="check()" class="form-select" aria-label="Default select example">
+					<option value="KZTSell">TENGE</option>
+					<option value="USDSell">DOLLAR</option>
+					<option value="EURSell">EURO</option>
+				</select>
+			</td>
+			<td>
+				<input id="KZTSell" readonly class="form-control" aria-describedby="addon-wrapping">
+			</td>
+			<td>
+				<input id="USDSell" readonly class="form-control" aria-describedby="addon-wrapping">
+			</td>
+			<td>
+				<input id="EURSell" readonly class="form-control" aria-describedby="addon-wrapping">
+			</td>
+		</tr>
+	</table>
+</body>
+<script>
+	function check() { 
+		let summa = document.getElementById("summa").value; 
+		let x = document.getElementById("convert").value;
+
+		let summaSell = document.getElementById("summaSell").value; 
+		let xSell = document.getElementById("convertSell").value;
+
+		let dollar = 429;
+		let euro = 507;
+		let resultDollar;
+		let resultEuro;
+		let resultTenge;
+
+		let dollarSell = 431;
+		let euroSell = 509;
+		let resultDollarSell;
+		let resultEuroSell;
+		let resultTengeSell;
+
+		if (x==="KZT") {
+			resultDollar = (summa/dollar).toFixed(2);
+			resultEuro = (summa/euro).toFixed(2);
+			document.getElementById("USD").value=resultDollar;
+			document.getElementById("EUR").value=resultEuro;
+			document.getElementById("KZT").value="-";
+		}else if (x==="EUR") {
+			resultTenge = (summa*euro);
+			resultDollar = (resultTenge/dollar).toFixed(2);
+			document.getElementById("KZT").value=resultTenge;
+			document.getElementById("USD").value=resultDollar;
+			document.getElementById("EUR").value="-";
+		}else if(x==="USD"){
+			resultTenge = (summa*dollar);
+			resultEuro = (resultTenge/euro).toFixed(2);
+			document.getElementById("KZT").value=resultTenge;
+			document.getElementById("USD").value="-";
+			document.getElementById("EUR").value=resultEuro;
+		}
+
+
+
+		if (xSell==="KZTSell") {
+			resultDollarSell = (summaSell/dollarSell).toFixed(2);
+			resultEuroSell = (summaSell/euroSell).toFixed(2);
+			document.getElementById("USDSell").value=resultDollarSell;
+			document.getElementById("EURSell").value=resultEuroSell;
+			document.getElementById("KZTSell").value="-";
+		}else if (xSell==="EURSell") {
+			resultTengeSell = (summaSell*euroSell);
+			resultDollarSell = (resultTengeSell/dollarSell).toFixed(2);
+			document.getElementById("KZTSell").value=resultTengeSell;
+			document.getElementById("USDSell").value=resultDollarSell;
+			document.getElementById("EURSell").value="-";
+		}else if(xSell==="USDSell"){
+			resultTengeSell = (summaSell*dollarSell);
+			resultEuroSell = (resultTengeSell/euroSell).toFixed(2);
+			document.getElementById("KZTSell").value=resultTengeSell;
+			document.getElementById("USDSell").value="-";
+			document.getElementById("EURSell").value=resultEuroSell;
+		}
+	}
+</script>
+</html>
